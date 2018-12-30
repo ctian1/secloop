@@ -14,7 +14,7 @@ window.onload = function() {
     '&enable_api=true' +
     '&show_artwork=false';
 
-  var url = 'http://w.soundcloud.com/player/?url=' + widget_options;
+  var url = 'https://w.soundcloud.com/player/?url=' + widget_options;
   
   var iframe = document.getElementById('soundcloud_widget');
   iframe.src = url || localStorage.getItem('url');
