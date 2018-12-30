@@ -60,7 +60,7 @@ window.onload = function() {
           $('.leftLabel').text(msToTime(startPos));
           $('.rightLabel').text(msToTime(endPos));
           
-          updateUrl(inputText, startPos, endPos);
+          updateUrl(userInput, startPos, endPos);
         }
       });
     });
