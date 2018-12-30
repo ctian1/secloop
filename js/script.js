@@ -6,10 +6,18 @@
 
 window.onload = function() {
   var searchParams = new URLSearchParams(window.location.href.split("?")[1]);
-  var inputName = decodeURI(searchParams.get('inputName'));
+  var userInput = decodeURI(searchParams.get('inputName'));
+
+  var widget_options =
+    userInput +
+    '&auto_play=false' +
+    '&enable_api=true' +
+    '&show_artwork=false';
+
+  var url = 'http://w.soundcloud.com/player/?url=' + widget_options;
   
   var iframe = document.getElementById('soundcloud_widget');
-  iframe.src = inputName || localStorage.getItem('url');
+  iframe.src = url || localStorage.getItem('url');
   var widget = SC.Widget(iframe);
   var songDuration = 0;
 
