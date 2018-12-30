@@ -5,7 +5,7 @@
  */
 
 window.onload = function() {
-  var searchParams = new URLSearchParams(window.location);
+  var searchParams = new URLSearchParams(window.location.href.split("?")[1]);
   var inputName = decodeURI(searchParams.get('inputName'));
   
   var iframe = document.getElementById('soundcloud_widget');
