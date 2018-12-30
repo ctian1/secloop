@@ -5,8 +5,11 @@
  */
 
 window.onload = function() {
+  var searchParams = new URLSearchParams(window.location);
+  var inputName = searchParams.get('inputName');
+  
   var iframe = document.getElementById('soundcloud_widget');
-  iframe.src = localStorage.getItem('url');
+  iframe.src = inputName || localStorage.getItem('url');
   var widget = SC.Widget(iframe);
   var songDuration = 0;
 
@@ -33,8 +36,8 @@ window.onload = function() {
     durationReady.then(function() {
       $('.nstSlider')[0].setAttribute('data-range_min', 0);
       $('.nstSlider')[0].setAttribute('data-range_max', songDuration);
-      $('.nstSlider')[0].setAttribute('data-cur_min', 0);
-      $('.nstSlider')[0].setAttribute('data-cur_max', songDuration);
+      $('.nstSlider')[0].setAttribute('data-cur_min', (searchParams.get('min') || 0));
+      $('.nstSlider')[0].setAttribute('data-cur_max', (searchParams.get('max') || songDuration));
 
       $('.nstSlider').nstSlider({
         'crossable_handles': false,
@@ -48,11 +51,18 @@ window.onload = function() {
 
           $('.leftLabel').text(msToTime(startPos));
           $('.rightLabel').text(msToTime(endPos));
+          
+          updateUrl(inputText, startPos, endPos);
         }
       });
     });
   });
 
+  function updateUrl(sc, min, max) {
+      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?inputName=' + encodeURI(sc) + '&min=' + min + '&max=' max;
+      window.history.pushState({path:newurl},'',newurl);
+  }
+  
   function msToTime(duration) {
 
     var milliseconds = parseInt((duration%1000)/100)
