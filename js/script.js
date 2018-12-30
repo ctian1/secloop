@@ -59,7 +59,7 @@ window.onload = function() {
   });
 
   function updateUrl(sc, min, max) {
-      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?inputName=' + encodeURI(sc) + '&min=' + min + '&max=' max;
+      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?inputName=' + encodeURI(sc) + '&min=' + min + '&max=' + max;
       window.history.pushState({path:newurl},'',newurl);
   }
   
